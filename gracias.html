@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gracias por tu aplicación — GranAds</title>
+<meta name="robots" content="noindex">
+
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap">
+
+<link rel="stylesheet" href="styles.css?v=20260724">
+<style>
+  .gracias-page { position: relative; min-height: 100vh; padding-block: clamp(3rem,7vw,5rem); overflow: clip; }
+  .gracias-inner { max-width: 720px; margin-inline: auto; text-align: center; }
+  .gracias-logo { height: 34px; margin-bottom: 2rem; }
+  .gracias-check {
+    width: 64px; height: 64px; border-radius: 50%; margin-inline: auto 1.5rem;
+    background: linear-gradient(135deg, var(--gold), var(--accent));
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: var(--glow-gold);
+  }
+  .gracias-check svg { width: 30px; height: 30px; color: #fff; }
+  .calendly-wrap { margin-top: 2.2rem; border-radius: var(--radius-md); overflow: hidden; }
+  .wa-fallback { margin-top: 1.6rem; font-size: .92rem; color: var(--ink-mute); }
+  .wa-fallback a { color: var(--gold); font-weight: 600; }
+</style>
+</head>
+<body>
+<main class="gracias-page">
+  <div class="hero-mesh" aria-hidden="true"></div>
+  <div class="container gracias-inner">
+    <img src="assets/img/logo-color-dark.webp" alt="GranAds" class="gracias-logo">
+    <div class="gracias-check">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
+    </div>
+    <h1 style="font-size:clamp(1.7rem,4vw,2.4rem);">¡Aplicación recibida!</h1>
+    <p style="margin-top:1rem; color:var(--ink-soft); font-size:1.05rem;">
+      Gracias por aplicar al Pipeline Sprint. Revisamos cada aplicación manualmente —
+      agenda ahora tu llamada de diagnóstico para asegurar tu cupo de este ciclo.
+    </p>
+
+    <div class="calendly-wrap card">
+      <div class="calendly-inline-widget" data-url="https://calendly.com/bookings-granads/30min?hide_gdpr_banner=1" style="min-width:280px; height:680px;"></div>
+    </div>
+
+    <p class="wa-fallback">
+      ¿Prefieres escribirnos directo? <a id="waFallback" href="#" target="_blank" rel="noopener">Contáctanos por WhatsApp</a>.
+    </p>
+  </div>
+</main>
+
+<script defer src="lib/manifest.js"></script>
+<script defer>
+  document.addEventListener("DOMContentLoaded", function () {
+    try {
+      var phone = ((window.__BRAND__ && window.__BRAND__.whatsapp) || "").replace(/\D/g, "");
+      var a = document.getElementById("waFallback");
+      if (a && phone) a.href = "https://wa.me/" + phone;
+    } catch (e) {}
+  });
+</script>
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+</body>
+</html>

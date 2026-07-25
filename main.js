@@ -13,6 +13,60 @@
   }
 
   /* ---------------------------------------------------------------
+     Urgency countdown — 24h, persisted per-visitor in localStorage.
+     Does NOT reset on refresh; only starts a new 24h window once the
+     previous one has actually expired.
+     --------------------------------------------------------------- */
+  function initUrgencyCountdown() {
+    var wrap = $("#urgencyTimer");
+    if (!wrap) return;
+    var hEl = wrap.querySelector("[data-h]");
+    var mEl = wrap.querySelector("[data-m]");
+    var sEl = wrap.querySelector("[data-s]");
+    var STORAGE_KEY = "granads_deadline";
+    var DURATION_MS = 24 * 60 * 60 * 1000;
+    var deadline = null;
+
+    try {
+      var stored = window.localStorage ? localStorage.getItem(STORAGE_KEY) : null;
+      if (stored) {
+        var parsed = parseInt(stored, 10);
+        if (parsed && parsed > Date.now()) deadline = parsed;
+      }
+      if (!deadline) {
+        deadline = Date.now() + DURATION_MS;
+        if (window.localStorage) localStorage.setItem(STORAGE_KEY, String(deadline));
+      }
+    } catch (err) {
+      // localStorage unavailable (private mode, etc.) — fall back to a
+      // session-only countdown so the bar still works.
+      deadline = Date.now() + DURATION_MS;
+    }
+
+    function pad(n) { return String(n).padStart(2, "0"); }
+
+    function tick() {
+      var remaining = deadline - Date.now();
+      if (remaining <= 0) {
+        // cycle renews — start a fresh 24h window
+        deadline = Date.now() + DURATION_MS;
+        try { if (window.localStorage) localStorage.setItem(STORAGE_KEY, String(deadline)); } catch (err) {}
+        remaining = DURATION_MS;
+      }
+      var totalSec = Math.floor(remaining / 1000);
+      var h = Math.floor(totalSec / 3600);
+      var m = Math.floor((totalSec % 3600) / 60);
+      var s = totalSec % 60;
+      if (hEl) hEl.textContent = pad(h);
+      if (mEl) mEl.textContent = pad(m);
+      if (sEl) sEl.textContent = pad(s);
+    }
+
+    tick();
+    setInterval(tick, 1000);
+  }
+
+  /* ---------------------------------------------------------------
      Nav: solidify on scroll
      --------------------------------------------------------------- */
   function initNav() {
@@ -218,7 +272,7 @@
       var el = document.querySelector(id);
       if (!el) return;
       e.preventDefault();
-      var navH = 84;
+      var navH = 84 + 46; // nav + urgency bar
       var top = el.getBoundingClientRect().top + window.scrollY - navH + 1;
       window.scrollTo({ top: top, behavior: reduced ? "auto" : "smooth" });
     });
@@ -236,7 +290,7 @@
 
       var fd = new FormData(form);
       var lines = [
-        "Hola, quiero aplicar al High Ticket Pipeline Sprint:",
+        "Hola, quiero aplicar al Pipeline Sprint:",
         "Nombre: " + (fd.get("nombre") || ""),
         "WhatsApp: " + (fd.get("whatsapp") || ""),
         "Empresa: " + (fd.get("empresa") || "-"),
@@ -253,7 +307,19 @@
       var text = encodeURIComponent(lines.join("\n"));
       var phone = (data.whatsapp || "").replace(/\D/g, "");
       var url = "https://wa.me/" + phone + "?text=" + text;
+
+      // Best-effort: also try to store the lead locally so nothing is lost
+      // if the redirect is interrupted (see note to the team about a real backend).
+      try {
+        if (window.localStorage) {
+          var leads = JSON.parse(localStorage.getItem("granads_leads") || "[]");
+          leads.push({ at: new Date().toISOString(), data: Object.fromEntries(fd.entries()) });
+          localStorage.setItem("granads_leads", JSON.stringify(leads));
+        }
+      } catch (err) {}
+
       window.open(url, "_blank", "noopener");
+      window.location.href = "gracias.html";
     });
   }
 
@@ -269,6 +335,7 @@
      Boot
      --------------------------------------------------------------- */
   function boot() {
+    safe(initUrgencyCountdown, "initUrgencyCountdown");
     safe(initNav, "initNav");
     safe(initReveals, "initReveals");
     safe(initPipelineFlow, "initPipelineFlow");
