@@ -11,9 +11,9 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap">
 
-<link rel="preload" as="image" href="assets/img/logo-color-dark.webp" fetchpriority="high">
+<link rel="preload" as="image" href="assets/img/logo-color-dark.png" fetchpriority="high">
 <link rel="stylesheet" href="styles.css?v=20260724">
 </head>
 <body>
@@ -35,7 +35,7 @@
   <div class="nav-glass" aria-hidden="true"></div>
   <div class="nav-inner">
     <a href="#main" class="nav-logo">
-      <img src="assets/img/logo-color-dark.webp" alt="GranAds" width="120" height="63">
+      <img src="assets/img/logo-color-dark.png" alt="GranAds" width="120" height="63">
     </a>
     <div class="nav-links">
       <a href="#problema">El problema</a>
@@ -57,8 +57,13 @@
     <div class="hero-mesh" aria-hidden="true"></div>
     <div class="container hero-grid">
       <div class="hero-content">
-        <p class="eyebrow">GranAds · Pipeline Sprint</p>
+        <div class="dot-divider" aria-hidden="true"><span></span><span></span><span></span></div>
+        <p class="pill-badge" style="margin-bottom:1.4rem;">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.6L19 9l-5.2 1.4L12 16l-1.8-5.6L5 9l5.2-1.4z"/></svg>
+          GranAds · Pipeline Sprint
+        </p>
         <h1 class="hero-title reveal">Convierte Meta Ads en <em>oportunidades calificadas</em> para tu negocio premium</h1>
+        <div class="hairline left"></div>
         <p class="hero-sub reveal">Instalamos en 28 días un sistema completo de adquisición con anuncios, landing page, creativos, filtros de calificación y seguimiento comercial para generar oportunidades reales, no solo "leads".</p>
         <div class="hero-actions">
           <a href="#aplicar" class="btn btn-primary">
@@ -158,6 +163,10 @@
         <h2>En 28 días instalamos tu sistema de adquisición premium</h2>
         <p>Creamos y gestionamos la estructura necesaria para convertir tráfico frío de Meta Ads en oportunidades calificadas: campañas, copywriting, creativos, landing page, formulario o WhatsApp, filtro de calificación, script de seguimiento, dashboard simple y optimización.</p>
         <p style="margin-top:1.4rem; font-weight:600; color:var(--ink);">La meta no es que tengas "más mensajes". La meta es que tengas un sistema que produzca oportunidades comerciales medibles.</p>
+      </div>
+      <div class="card guarantee-mini reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/></svg>
+        <p><strong>Garantía Pipeline:</strong> Si no generamos oportunidades calificadas según criterios acordados, seguimos trabajando sin cobrar fee de gestión hasta conseguirlas.</p>
       </div>
     </div>
   </section>
@@ -376,9 +385,9 @@
         <h2>Elige tu Sprint</h2>
         <p>La inversión publicitaria se paga aparte directamente a Meta.</p>
       </div>
-      <div class="pricing-grid">
-        <div class="price-card card reveal">
-          <span class="p-days">28 días</span>
+      <div class="pricing-split card reveal">
+        <div class="price-card">
+          <span class="pill-badge">28 días</span>
           <p class="p-amount">$2,500</p>
           <ul>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 12l3 3 5-6"/><circle cx="12" cy="12" r="9"/></svg> Sistema completo instalado</li>
@@ -388,9 +397,9 @@
           </ul>
           <a href="#aplicar" class="btn btn-ghost btn-block">Aplicar a 28 días</a>
         </div>
-        <div class="price-card card is-best reveal">
-          <span class="best-tag">Mejor opción</span>
-          <span class="p-days">84 días</span>
+        <div class="price-divider" aria-hidden="true"></div>
+        <div class="price-card is-best">
+          <span class="pill-badge">84 días · Mejor opción</span>
           <p class="p-amount">$6,500 <span>· antes $7,500</span></p>
           <p class="p-save">Ahorras $1,000</p>
           <ul>
@@ -618,7 +627,7 @@
 <!-- ============================= FOOTER ============================= -->
 <footer class="footer">
   <div class="container footer-grid">
-    <a href="#main" class="footer-logo"><img src="assets/img/logo-color-dark.webp" alt="GranAds" width="110" height="57"></a>
+    <a href="#main" class="footer-logo"><img src="assets/img/logo-color-dark.png" alt="GranAds" width="110" height="57"></a>
     <div class="footer-links">
       <a href="#problema">El problema</a>
       <a href="#incluye">Qué incluye</a>

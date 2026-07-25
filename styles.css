@@ -13,9 +13,9 @@
   --bg:        #111110;   /* negro */
   --bg-2:      #17140F;
   --paper:     #1C1811;
-  --glass:     rgba(243, 244, 233, 0.05);
-  --glass-2:   rgba(243, 244, 233, 0.035);
-  --glass-border: rgba(212, 175, 55, 0.22);
+  --glass:     rgba(10, 9, 7, 0.72);
+  --glass-2:   rgba(10, 9, 7, 0.48);
+  --glass-border: rgba(212, 175, 55, 0.24);
 
   --ink:       #F3F4E9;   /* crema — texto principal sobre negro */
   --ink-soft:  rgba(243, 244, 233, 0.74);
@@ -39,7 +39,7 @@
   --radius-lg: 28px;
 
   --sans: "Inter", system-ui, -apple-system, sans-serif;
-  --display: "Space Grotesk", var(--sans);
+  --display: "Fraunces", Georgia, serif;
 
   --ease-out:  cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in:   cubic-bezier(0.7, 0, 0.84, 0);
@@ -79,9 +79,9 @@ p { text-wrap: pretty; }
 h1, h2, h3, h4 {
   font-family: var(--display);
   text-wrap: balance;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  font-weight: 600;
 }
 ul { list-style: none; padding: 0; }
 ::selection { background: var(--gold); color: var(--bg); }
@@ -179,33 +179,62 @@ ul { list-style: none; padding: 0; }
   transition: transform .35s var(--ease-out), box-shadow .35s var(--ease-out), background .3s var(--ease-out);
 }
 .btn-primary {
-  background: linear-gradient(135deg, var(--gold) 0%, var(--accent) 130%);
-  color: #fff;
-  box-shadow: 0 10px 30px rgba(139, 31, 29, .28);
+  background: var(--gold);
+  color: #191510;
+  box-shadow: 0 0 0 1px rgba(212,175,55,0.5), 0 12px 32px rgba(212, 175, 55, 0.28);
 }
-.btn-primary:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 16px 40px rgba(139, 31, 29, .38); }
+.btn-primary:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 0 0 1px rgba(212,175,55,0.6), 0 18px 44px rgba(212, 175, 55, 0.4); }
 .btn-ghost {
-  background: var(--glass-2);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid var(--line);
-  color: var(--ink);
+  background: transparent;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  color: var(--gold);
 }
-.btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+.btn-ghost:hover { border-color: var(--gold); background: rgba(212,175,55,0.08); color: var(--gold-soft); }
 .btn-block { width: 100%; justify-content: center; }
 .btn svg { width: 18px; height: 18px; flex: none; }
 
 .card {
-  background: var(--glass);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background: var(--paper);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
 }
-@supports not (backdrop-filter: blur(1px)) {
-  .card { background: rgba(28, 24, 17, 0.92); }
+
+.pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .5em;
+  padding: .55rem 1.3rem;
+  border-radius: 999px;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  background: rgba(212, 175, 55, 0.05);
+  font-family: var(--display);
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--gold);
 }
+.pill-badge svg { width: 13px; height: 13px; flex: none; }
+
+.dot-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  margin-bottom: 1.2rem;
+}
+.dot-divider span {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 8px 1px rgba(212,175,55,0.6);
+}
+
+.hairline {
+  width: 64px; height: 1px; margin: 1.4rem auto;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.hairline.left { margin-inline: 0; }
 
 .badge {
   display: inline-flex;
@@ -280,9 +309,7 @@ ul { list-style: none; padding: 0; }
   position: absolute; inset: 10px clamp(.75rem, 3vw, 2rem) auto;
   height: calc(var(--nav-h) - 20px);
   border-radius: 999px;
-  background: var(--glass);
-  backdrop-filter: blur(18px) saturate(180%);
-  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  background: rgba(17, 17, 16, 0.86);
   border: 1px solid var(--glass-border);
   box-shadow: var(--shadow-sm);
   opacity: 0;
@@ -337,17 +364,17 @@ ul { list-style: none; padding: 0; }
   overflow: clip;
 }
 .hero-mesh {
-  position: absolute; inset: -10% -10% 30% -10%; z-index: -2;
+  position: absolute; inset: 0; z-index: -2;
   background:
-    radial-gradient(at 18% 20%, rgba(212, 175, 55, 0.42) 0%, transparent 55%),
-    radial-gradient(at 82% 12%, rgba(140, 24, 21, 0.38) 0%, transparent 50%),
-    radial-gradient(at 50% 95%, rgba(212, 175, 55, 0.24) 0%, transparent 55%);
-  filter: blur(80px) saturate(150%);
+    radial-gradient(circle at 12% 8%, rgba(212, 175, 55, 0.22) 0%, transparent 32%),
+    radial-gradient(circle at 88% 4%, rgba(140, 24, 21, 0.24) 0%, transparent 30%),
+    radial-gradient(circle at 46% 96%, rgba(212, 175, 55, 0.12) 0%, transparent 30%);
+  filter: blur(90px);
   animation: meshDrift 34s var(--ease-soft) infinite;
 }
 @keyframes meshDrift {
   0%, 100% { transform: scale(1) rotate(0deg); }
-  50%      { transform: scale(1.18) rotate(8deg); }
+  50%      { transform: scale(1.08) rotate(4deg); }
 }
 .hero-grid {
   display: grid;
@@ -554,7 +581,7 @@ ul { list-style: none; padding: 0; }
 .stack-total {
   margin-top: 1.5rem; padding: 1.6rem;
   display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
-  background: linear-gradient(120deg, var(--gold-soft), var(--gold));
+  background: var(--gold);
   border-radius: var(--radius-md);
   color: var(--bg);
   box-shadow: var(--glow-gold);
@@ -565,36 +592,58 @@ ul { list-style: none; padding: 0; }
 /* =============================================================
    13. Pricing
    ============================================================= */
-.pricing-grid {
-  display: grid; gap: 1.6rem; grid-template-columns: 1fr;
+.pricing-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(212,175,55,0.12), var(--shadow-md);
 }
-@media (min-width: 860px) { .pricing-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 860px) {
+  .pricing-split { grid-template-columns: 1fr 1px 1fr; }
+  .pricing-split .price-divider {
+    background: linear-gradient(180deg, transparent, rgba(212,175,55,0.5), transparent);
+  }
+}
 .price-card {
-  padding: 2.1rem;
+  padding: clamp(1.8rem, 4vw, 2.6rem);
   position: relative;
   display: flex; flex-direction: column; gap: 1.1rem;
+  border-top: 1px solid var(--line-soft);
 }
-.price-card.is-best {
-  border: 1.5px solid var(--gold);
-  box-shadow: var(--shadow-md);
-}
-.price-card .best-tag {
-  position: absolute; top: -14px; left: 2rem;
-  background: linear-gradient(135deg, var(--gold), var(--accent));
-  color: #fff; font-size: .78rem; font-weight: 700;
-  padding: .35rem .9rem; border-radius: 999px;
-}
+@media (min-width: 860px) { .price-card { border-top: none; } }
+.price-card .pill-badge { align-self: flex-start; }
+.price-card.is-best .p-amount { color: var(--ink); }
 .price-card .p-days { font-size: .9rem; color: var(--ink-mute); font-weight: 600; }
-.price-card .p-amount { font-family: var(--display); font-size: clamp(2.1rem, 5vw, 2.7rem); font-weight: 700; }
+.price-card .p-amount { font-family: var(--display); font-size: clamp(2.2rem, 5vw, 2.8rem); font-weight: 600; color: var(--gold); }
 .price-card .p-amount span { font-size: 1rem; font-weight: 500; color: var(--ink-mute); }
-.price-card .p-save { font-size: .85rem; color: var(--gold); font-weight: 600; }
+.price-card .p-save {
+  font-size: .85rem; font-weight: 600; color: var(--ink);
+  background: rgba(140, 24, 21, 0.22);
+  border: 1px solid rgba(140,24,21,0.5);
+  padding: .7rem 1rem; border-radius: var(--radius-sm);
+}
 .price-card ul { display: flex; flex-direction: column; gap: .6rem; }
 .price-card li { display: flex; gap: .55rem; font-size: .92rem; color: var(--ink-soft); }
 .price-card li svg { width: 16px; height: 16px; color: var(--gold); flex: none; margin-top: 3px; }
 .price-note { text-align: center; font-size: .88rem; color: var(--ink-mute); margin-top: 1.4rem; }
 
+.guarantee-mini {
+  margin-top: 2rem;
+  padding: 1.2rem 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: .9rem;
+  max-width: 640px;
+  margin-inline: auto;
+}
+.guarantee-mini svg { width: 20px; height: 20px; color: var(--gold); flex: none; margin-top: 2px; }
+.guarantee-mini p { font-size: .94rem; color: var(--ink-soft); }
+.guarantee-mini strong { color: var(--gold); }
+
 /* =============================================================
    14. Guarantee & qualified-opportunity
+
    ============================================================= */
 .guarantee-card {
   padding: clamp(1.8rem, 4vw, 2.6rem);
