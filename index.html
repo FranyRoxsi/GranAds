@@ -218,7 +218,7 @@ footer .fine{color:var(--muted);font-size:12.5px;opacity:.7;margin-top:26px}
       <a href="#faq">Preguntas</a>
     </div>
     <div class="nav-cta">
-      <a href="#solicitar" class="btn btn-gold">Solicita tu diagnóstico</a>
+      <a href="#solicitar" class="btn btn-gold">Quiero el cupo de este mes</a>
       <button class="burger" data-burger aria-label="Menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
     </div>
   </div>
@@ -448,7 +448,7 @@ footer .fine{color:var(--muted);font-size:12.5px;opacity:.7;margin-top:26px}
         <div class="slot open"><div class="dot">1</div><small>Disponible</small></div>
       </div>
       <div class="clock2wrap">La inscripción para el próximo ciclo cierra en <span class="clock2" data-clock>24:00:00</span></div>
-      <a href="#solicitar" class="btn btn-gold">Quiero el cupo restante <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a href="#solicitar" class="btn btn-gold">Reservar el último cupo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
   </div>
 </section>
@@ -514,7 +514,7 @@ footer .fine{color:var(--muted);font-size:12.5px;opacity:.7;margin-top:26px}
 </footer>
 
 <div class="float-cta" data-float>
-  <a href="#solicitar" class="btn btn-gold">Solicita tu diagnóstico · 1 cupo</a>
+  <a href="#solicitar" class="btn btn-gold">Quiero el cupo · queda 1</a>
 </div>
 
 <script>
@@ -522,7 +522,7 @@ footer .fine{color:var(--muted);font-size:12.5px;opacity:.7;margin-top:26px}
   "use strict";
   function safe(fn,name){try{fn();}catch(e){console.warn("["+name+"]",e);}}
   /* ▼ PEGA AQUÍ tu URL de Formspree o de Google Apps Script para recibir cada lead. Vacío = solo Calendly. ▼ */
-  var FORM_ENDPOINT="";
+  var FORM_ENDPOINT="https://script.google.com/macros/s/AKfycbweXypXKSJt3wy6uC8JPGN_ZZ8q00RQA7nzkz3G8QwWgcQwUHJY-OYIRyhQD2rapQGrhA/exec";
   function initCountdown(){
     var KEY="ga_deadline_v1",WIN=24*3600*1000,now=Date.now(),dl;
     try{dl=parseInt(localStorage.getItem(KEY),10);}catch(e){dl=NaN;}
@@ -585,7 +585,7 @@ footer .fine{color:var(--muted);font-size:12.5px;opacity:.7;margin-top:26px}
       inputs.forEach(function(i){if(!i.value){ok=false;i.style.borderColor="#a8231d";if(!first)first=i;}else{i.style.borderColor="";}});
       if(!ok){if(first)first.focus();return;}
       var g=function(n){var el=form.querySelector('[name='+n+']');return el?el.value:"";};
-      var data={nombre:g("nombre"),clinica:g("clinica"),ciudad:g("ciudad"),telefono:g("telefono"),email:g("email"),tratamiento:g("tratamiento")};
+      var data={mercado:"Venezuela",nombre:g("nombre"),clinica:g("clinica"),ciudad:g("ciudad"),telefono:g("telefono"),email:g("email"),tratamiento:g("tratamiento")};
       if(FORM_ENDPOINT){try{fetch(FORM_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(data)});}catch(e){}}
       var q="?name="+encodeURIComponent(data.nombre)+"&email="+encodeURIComponent(data.email);
       window.location.href="gracias-ve.html"+q;
